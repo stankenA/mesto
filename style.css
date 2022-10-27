@@ -271,6 +271,7 @@
   width: 32px;
   height: 32px;
   background-image: url(./images/close.svg);
+  background-size: cover;
   position: absolute;
   top: -40px;
   right: -40px;
@@ -396,6 +397,12 @@
   .footer__copyright {
     font-size: 14px;
     line-height: 17px;
+  }
+
+  .close {
+    width: 20px;
+    height: 20px;
+    right: 0;
   }
 
 }
