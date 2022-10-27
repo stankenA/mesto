@@ -1,0 +1,25 @@
+.close {
+  display: block;
+  width: 32px;
+  height: 32px;
+  background-image: url(../../images/close.svg);
+  background-size: cover;
+  position: absolute;
+  top: -40px;
+  right: -40px;
+  cursor: pointer;
+  transition: all .5s ease;
+}
+
+.close:hover {
+  opacity: .6;
+}
+
+@media screen and (max-width: 450px) {
+
+  .close {
+    width: 20px;
+    height: 20px;
+    right: 0;
+  }
+}
