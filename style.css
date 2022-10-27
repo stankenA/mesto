@@ -114,7 +114,7 @@
   margin-bottom: 66px;
 }
 
-.gallery__list {
+.gallery__grid {
   display: grid;
   justify-content: center;
   grid-template-columns: repeat(auto-fill, 282px);
