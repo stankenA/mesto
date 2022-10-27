@@ -151,6 +151,10 @@
   font-size: 24px;
   line-height: 29px;
   margin: 0;
+  max-width: 224px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
 }
 
 .gallery__like {
@@ -175,6 +179,7 @@
 }
 
 .footer__copyright {
+  margin: 0;
   font-weight: 400;
   font-size: 18px;
   line-height: 22px;
@@ -182,8 +187,19 @@
 }
 
 @media screen and (max-width: 768px) {
+
   .profile {
     flex-direction: column;
+    margin-top: 42px;
+  }
+
+  .profile__picture {
+    margin-right: 0;
+    margin-bottom: 26px;
+  }
+
+  .profile__info {
+    gap: 14px;
   }
 
   .profile__name {
@@ -195,6 +211,68 @@
   }
 
   .profile__button {
+    width: 80%;
+    margin-top: 36px;
     margin-left: 0;
   }
+
+}
+
+@media screen and (max-width: 450px) {
+
+  .header {
+    margin-top: 28px;
+    margin-left: 0;
+    margin-right: 0;
+    min-height: 56px;
+  }
+
+  .header__logo {
+    width: 104px;
+    margin-left: 27px;
+  }
+
+  .profile {
+    margin-bottom: 36px;
+  }
+
+  .profile__name {
+    font-size: 27px;
+    line-height: 33px;
+    max-width: 240px;
+  }
+
+  .profile__edit {
+    width: 18px;
+    height: 18px;
+  }
+
+  .profile__pen {
+    width: 7.5px;
+    height: 7.5px;
+  }
+
+  .profile__description {
+    max-width: 240px;
+    font-size: 14px;
+    line-height: 17px;
+  }
+
+  .profile__button {
+    width: 100%;
+  }
+
+  .gallery {
+    margin-bottom: 48px;
+  }
+
+  .footer {
+    margin-bottom: 36px;
+  }
+
+  .footer__copyright {
+    font-size: 14px;
+    line-height: 17px;
+  }
+
 }
