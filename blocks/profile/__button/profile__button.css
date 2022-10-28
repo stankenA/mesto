@@ -21,7 +21,7 @@
   transition: all .5s ease;
   background-image: url(./../../../images/plus.svg);
   background-repeat: no-repeat;
-  background-size: 22px 22px;
+  background-size: 17px 17px;
   background-position: center;
 }
 
@@ -33,7 +33,7 @@
 
   .profile__button {
     width: 80%;
-    margin-top: 36px;
+    margin-top: 33px;
     margin-left: 0;
   }
 
