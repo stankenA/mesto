@@ -1,4 +1,4 @@
-.gallery__like {
+.gallery__like-button {
   width: 22px;
   height: 19px;
   cursor: pointer;
@@ -8,13 +8,13 @@
   -o-transition: all .5s ease;
   transition: all .5s ease;
   border: none;
-  background-color: inherit;
+  background-color: transparent;
 }
 
-.gallery__like:hover {
+.gallery__like-button:hover {
   opacity: .5;
 }
 
-.gallery__like_active {
+.gallery__like-button_active {
   background-image: url(./../../../images/like_active.svg);
 }

@@ -4,6 +4,7 @@
   height: 32px;
   background-image: url(./../../../images/close.svg);
   background-size: cover;
+  background-repeat: no-repeat;
   position: absolute;
   top: -40px;
   right: -40px;
@@ -25,5 +26,6 @@
     width: 20px;
     height: 20px;
     right: 0;
+    top: -36px;
   }
 }
