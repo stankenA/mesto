@@ -1,18 +1,24 @@
 let editButton = document.querySelector('.profile__edit');
-let closeButton = document.querySelector('.close');
+let closeButton = document.querySelector('.popup__close');
 let popupContainer = document.querySelector('.popup');
 
 let profName = document.querySelector('.profile__name');
 let profDescr = document.querySelector('.profile__description');
 
 
-let formElement = document.querySelector('.input-container');
+let formElement = document.querySelector('.form');
 let nameInput = formElement.querySelector('.input_name');
 let descrInput = formElement.querySelector('.input_description');
-let submitButton = formElement.querySelector('.submit');
+let submitButton = formElement.querySelector('.form__submit');
 
-function popupToggle() {
-  popupContainer.classList.toggle('popup_opened');
+function popupOpen() {
+  popupContainer.classList.add('popup_opened');
+  nameInput.value = profName.textContent;
+  descrInput.value = profDescr.textContent;
+}
+
+function popupClose() {
+  popupContainer.classList.remove('popup_opened');
 }
 
 function formSubmitHandler(evt) {
@@ -20,14 +26,10 @@ function formSubmitHandler(evt) {
 
   profName.textContent = `${nameInput.value}`;
   profDescr.textContent = `${descrInput.value}`;
-  popupContainer.classList.remove('popup_opened');
+  popupClose();
 }
 
-nameInput.value = profName.textContent;
-descrInput.value = profDescr.textContent;
 
-
-editButton.addEventListener('click', popupToggle);
-closeButton.addEventListener('click', popupToggle);
-submitButton.addEventListener('click', formSubmitHandler);
+editButton.addEventListener('click', popupOpen);
+closeButton.addEventListener('click', popupClose);
 formElement.addEventListener('submit', formSubmitHandler);

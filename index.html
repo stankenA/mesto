@@ -20,78 +20,75 @@
       <img src="./images/cousteau.jpg" alt="Фотография профиля" class="profile__picture">
       <div class="profile__info">
         <h1 class="profile__name">Жак-Ив Кусто</h1>
-        <button class="profile__edit">
-          <img src="./images/pen.svg" alt="Редактирование" class="profile__pen">
-        </button>
+        <button type="submit" class="profile__edit" aria-label="edit button"></button>
         <p class="profile__description">Исследователь океана</p>
       </div>
-      <button class="profile__button">
-        <img src="./images/plus.svg" alt="Знак плюса" class="profile__plus">
-      </button>
+      <button class="profile__button" aria-label="add photo button"></button>
     </section>
     <section class="gallery">
       <ul class="gallery__grid">
         <li class="gallery__card">
           <img src="./images/karachaevsk.jpg" alt="Фото из галлереи" class="gallery__picture">
           <div class="gallery__card-container">
-            <p class="gallery__caption">Карачаевск</p>
-            <span class="gallery__like"></span>
+            <h2 class="gallery__caption">Карачаевск</h2>
+            <button type="submit" class="gallery__like" aria-label="like button"></button>
           </div>
         </li>
         <li class="gallery__card">
           <img src="./images/elbrus.jpg" alt="Фото из галлереи" class="gallery__picture">
           <div class="gallery__card-container">
-            <p class="gallery__caption">Гора Эльбрус</p>
-            <span class="gallery__like"></span>
+            <h2 class="gallery__caption">Гора Эльбрус</h2>
+            <button type="submit" class="gallery__like" aria-label="like button"></button>
           </div>
         </li>
         <li class="gallery__card">
           <img src="./images/dombay.jpg" alt="Фото из галлереи" class="gallery__picture">
           <div class="gallery__card-container">
-            <p class="gallery__caption">Домбай</p>
-            <span class="gallery__like"></span>
+            <h2 class="gallery__caption">Домбай</h2>
+            <button type="submit" class="gallery__like" aria-label="like button"></button>
           </div>
         </li>
         <li class="gallery__card">
           <img src="./images/elbrus.jpg" alt="Фото из галлереи" class="gallery__picture">
           <div class="gallery__card-container">
-            <p class="gallery__caption">Гора Эльбрус</p>
-            <span class="gallery__like"></span>
+            <h2 class="gallery__caption">Гора Эльбрус</h2>
+            <button type="submit" class="gallery__like" aria-label="like button"></button>
           </div>
         </li>
         <li class="gallery__card">
           <img src="./images/dombay.jpg" alt="Фото из галлереи" class="gallery__picture">
           <div class="gallery__card-container">
-            <p class="gallery__caption">Домбай</p>
-            <span class="gallery__like"></span>
+            <h2 class="gallery__caption">Домбай</h2>
+            <button type="submit" class="gallery__like" aria-label="like button"></button>
           </div>
         </li>
         <li class="gallery__card">
           <img src="./images/karachaevsk.jpg" alt="Фото из галлереи" class="gallery__picture">
           <div class="gallery__card-container">
-            <p class="gallery__caption">Карачаевск</p>
-            <span class="gallery__like"></span>
+            <h2 class="gallery__caption">Карачаевск</h2>
+            <button type="submit" class="gallery__like" aria-label="like button"></button>
           </div>
         </li>
       </ul>
-
     </section>
-    <footer class="footer">
-      <p class="footer__copyright">&copy; 2020 Mesto Russia</p>
-    </footer>
   </main>
+  <footer class="footer">
+    <p class="footer__copyright">&copy; 2020 Mesto Russia</p>
+  </footer>
   <div class="popup">
     <div class="popup__container">
-      <p class="popup__header">Редактировать профиль</p>
-      <fieldset class="input-container">
-        <input type="text" class="input input_name" placeholder="Имя">
-        <input type="text" class="input input_description" placeholder="О себе">
-        <button type="submit" class="submit">Сохранить</button>
-      </fieldset>
-      <span class="close"></span>
+      <h2 class="popup__header">Редактировать профиль</h2>
+      <form name="ediform" class="form">
+        <fieldset class="form__container">
+          <input type="text" class="input input_name" placeholder="Имя" name="name">
+          <input type="text" class="input input_description" placeholder="О себе" name="about">
+          <button type="submit" class="form__submit">Сохранить</button>
+        </fieldset>
+      </form>
+      <button type="submit" class="popup__close" aria-label="close popup button"></button>
     </div>
   </div>
-  <script src="./pages/index.js"></script>
+  <script src="./script/index.js" defer></script>
 </body>
 
 </html>
