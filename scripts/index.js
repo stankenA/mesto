@@ -1,5 +1,5 @@
 let editButton = document.querySelector('.profile__edit-button');
-let closeButton = document.querySelector('.popup__close');
+let closeButton = document.querySelector('.popup__close-button');
 let popupContainer = document.querySelector('.popup');
 
 let profName = document.querySelector('.profile__name');
@@ -7,9 +7,8 @@ let profDescr = document.querySelector('.profile__description');
 
 
 let formElement = document.querySelector('.popup__form');
-let nameInput = formElement.querySelector('.popup__input_name');
-let descrInput = formElement.querySelector('.popup__input_description');
-let submitButton = formElement.querySelector('.popup__submit-button');
+let nameInput = formElement.querySelector('.popup__input_type_name');
+let descrInput = formElement.querySelector('.popup__input_type_description');
 
 function popupOpen() {
   popupContainer.classList.add('popup_opened');
