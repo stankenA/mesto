@@ -32,3 +32,67 @@ function formSubmitHandler(evt) {
 editButton.addEventListener('click', popupOpen);
 closeButton.addEventListener('click', popupClose);
 formElement.addEventListener('submit', formSubmitHandler);
+
+const initialCards = [
+  {
+    name: 'Архыз',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
+  },
+  {
+    name: 'Челябинская область',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg'
+  },
+  {
+    name: 'Иваново',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg'
+  },
+  {
+    name: 'Камчатка',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg'
+  },
+  {
+    name: 'Холмогорский район',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg'
+  },
+  {
+    name: 'Байкал',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
+  }
+];
+
+const cardsTemplate = document.querySelector('#card-template').content;
+const cardsList = document.querySelector('.gallery__grid');
+
+// function newCard(item) {
+//   const cardsElement = cardsTemplate.cloneNode(true);
+
+//   cardsElement.querySelector('.gallery__picture').src = item.link;
+//   cardsElement.querySelector('.gallery__caption').textContent = item.name;
+
+//   cardsList.prepend(cardsElement);
+// };
+
+initialCards.forEach(function (item) {
+  const cardsElement = cardsTemplate.cloneNode(true);
+
+  cardsElement.querySelector('.gallery__picture').src = item.link;
+  cardsElement.querySelector('.gallery__caption').textContent = item.name;
+
+  // cardsElement.addEventListener('click', function(evt) {
+  //   const likeButton = cardsElement.querySelector('.gallery__like-button');
+
+  // })
+
+  cardsList.prepend(cardsElement);
+});
+
+// initialCards.forEach(newCard());
+
+
+
+
+
+  // cardsElement.addEventListener('click', function (evt) {
+  //   const likeButton = cardsElement.querySelector('gallery__like-button');
+  //   likeButton.classList.toggle('')
+  // })
