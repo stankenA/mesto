@@ -63,36 +63,16 @@ const initialCards = [
 const cardsTemplate = document.querySelector('#card-template').content;
 const cardsList = document.querySelector('.gallery__grid');
 
-// function newCard(item) {
-//   const cardsElement = cardsTemplate.cloneNode(true);
-
-//   cardsElement.querySelector('.gallery__picture').src = item.link;
-//   cardsElement.querySelector('.gallery__caption').textContent = item.name;
-
-//   cardsList.prepend(cardsElement);
-// };
-
 initialCards.forEach(function (item) {
   const cardsElement = cardsTemplate.cloneNode(true);
 
   cardsElement.querySelector('.gallery__picture').src = item.link;
   cardsElement.querySelector('.gallery__caption').textContent = item.name;
 
-  // cardsElement.addEventListener('click', function(evt) {
-  //   const likeButton = cardsElement.querySelector('.gallery__like-button');
+  cardsElement.querySelector('.gallery__like-button').addEventListener('click', function (evt) {
+    evt.target.classList.toggle('gallery__like-button_active');
+  })
 
-  // })
 
   cardsList.prepend(cardsElement);
 });
-
-// initialCards.forEach(newCard());
-
-
-
-
-
-  // cardsElement.addEventListener('click', function (evt) {
-  //   const likeButton = cardsElement.querySelector('gallery__like-button');
-  //   likeButton.classList.toggle('')
-  // })
