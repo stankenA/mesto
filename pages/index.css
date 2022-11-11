@@ -22,6 +22,7 @@
 @import url(../blocks/gallery/__grid/gallery__grid.css);
 @import url(../blocks/gallery/__like-button/gallery__like-button.css);
 @import url(../blocks/gallery/__picture/gallery__picture.css);
+@import url(../blocks/gallery/__delete-button/gallery__delete-button.css);
 
 @import url(../blocks/footer/footer.css);
 @import url(../blocks/footer/__copyright/footer__copyright.css);
