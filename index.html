@@ -60,6 +60,13 @@
       <button type="button" class="popup__close-button" aria-label="Кнопка закрытия попапа"></button>
     </div>
   </div>
+  <div class="popup popup_dark popup_type_fz-photo">
+    <div class="popup__photo-container">
+      <img src="./images/test_image.jpg" alt="Фото из галлереи" class="popup__image">
+      <p class="popup__caption"></p>
+      <button type="button" class="popup__close-button" aria-label="Кнопка закрытия попапа"></button>
+    </div>
+  </div>
   <template id="card-template">
     <li class="gallery__card">
       <img alt="Фото из галлереи" class="gallery__picture">
@@ -69,13 +76,6 @@
         <button class="gallery__delete-button"></button>
       </div>
     </li>
-  </template>
-  <template id="full-size-photo">
-    <div class="popup">
-      <div class="popup__container">
-        <img alt="Фото из галлереи" class="popup__image">
-      </div>
-    </div>
   </template>
   <script src="./scripts/index.js" defer></script>
 </body>

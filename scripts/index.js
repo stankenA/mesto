@@ -65,6 +65,21 @@ function formPhotoSubmit(evt) {
     evt.target.closest('.gallery__card').remove();
   });
 
+  cardsElement.querySelector('.gallery__picture').addEventListener('click', function (evt) {
+
+    const photoElement = document.querySelector('.popup_type_fz-photo');
+    photoElement.classList.add('popup_opened');
+
+    photoElement.querySelector('.popup__image').src = evt.target.src;
+    photoElement.querySelector('.popup__caption').textContent = evt.target.parentNode.querySelector('.gallery__caption').textContent;
+
+    const photoCloseButton = photoElement.querySelector('.popup__close-button');
+    photoCloseButton.addEventListener('click', function () {
+      photoElement.classList.remove('popup_opened');
+    })
+
+  })
+
   cardsList.prepend(cardsElement);
 
   cardTitle.value = '';
@@ -80,9 +95,6 @@ formProfileElement.addEventListener('submit', formProfileSubmit);
 addPhotoButton.addEventListener('click', popupNewPhotoOpen);
 closePhotoButton.addEventListener('click', popupNewPhotoClose);
 formPhotoElement.addEventListener('submit', formPhotoSubmit);
-
-
-
 
 const initialCards = [
   {
@@ -114,7 +126,6 @@ const initialCards = [
 const cardsTemplate = document.querySelector('#card-template').content;
 const cardsList = document.querySelector('.gallery__grid');
 
-
 initialCards.forEach(function (item) {
   const cardsElement = cardsTemplate.cloneNode(true);
 
@@ -129,5 +140,21 @@ initialCards.forEach(function (item) {
     evt.target.closest('.gallery__card').remove();
   });
 
+  cardsElement.querySelector('.gallery__picture').addEventListener('click', function () {
+
+    const photoElement = document.querySelector('.popup_type_fz-photo');
+    photoElement.classList.add('popup_opened');
+    photoElement.querySelector('.popup__image').src = item.link;
+    photoElement.querySelector('.popup__caption').textContent = item.name;
+
+    const photoCloseButton = photoElement.querySelector('.popup__close-button');
+    photoCloseButton.addEventListener('click', function () {
+      photoElement.classList.remove('popup_opened');
+    })
+
+  })
+
   cardsList.prepend(cardsElement);
 });
+
+
