@@ -1,37 +1,88 @@
-let editButton = document.querySelector('.profile__edit-button');
-let closeButton = document.querySelector('.popup__close-button');
-let popupContainer = document.querySelector('.popup');
+const popupProfileContainer = document.querySelector('.popup_type_profile');
+const popupNewPhotoContainer = document.querySelector('.popup_type_new-photo');
 
-let profName = document.querySelector('.profile__name');
-let profDescr = document.querySelector('.profile__description');
+const editProfileButton = document.querySelector('.profile__edit-button');
+const closeProfileButton = document.querySelector('.popup__close-button');
 
 
-let formElement = document.querySelector('.popup__form');
-let nameInput = formElement.querySelector('.popup__input_type_name');
-let descrInput = formElement.querySelector('.popup__input_type_description');
+const addPhotoButton = document.querySelector('.profile__add-button');
+const closePhotoButton = popupNewPhotoContainer.querySelector('.popup__close-button');
 
-function popupOpen() {
-  popupContainer.classList.add('popup_opened');
+const profName = document.querySelector('.profile__name');
+const profDescr = document.querySelector('.profile__description');
+
+const formProfileElement = document.querySelector('.popup__form_type_profile');
+const formPhotoElement = document.querySelector('.popup__form_type_new-photo');
+const nameInput = formProfileElement.querySelector('.popup__input_type_name');
+const descrInput = formProfileElement.querySelector('.popup__input_type_description');
+
+const photoNameInput = formPhotoElement.querySelector('.popup__input_type_photo-title');
+const photoHrefInput = formPhotoElement.querySelector('.popup__input_type_photo-href');
+
+function popupProfileOpen() {
+  popupProfileContainer.classList.add('popup_opened');
   nameInput.value = profName.textContent;
   descrInput.value = profDescr.textContent;
 }
 
-function popupClose() {
-  popupContainer.classList.remove('popup_opened');
+function popupProfileClose() {
+  popupProfileContainer.classList.remove('popup_opened');
 }
 
-function formSubmitHandler(evt) {
+function formProfileSubmit(evt) {
   evt.preventDefault();
 
   profName.textContent = `${nameInput.value}`;
   profDescr.textContent = `${descrInput.value}`;
-  popupClose();
+  popupProfileClose();
 }
 
+function popupNewPhotoOpen() {
+  popupNewPhotoContainer.classList.add('popup_opened');
+}
 
-editButton.addEventListener('click', popupOpen);
-closeButton.addEventListener('click', popupClose);
-formElement.addEventListener('submit', formSubmitHandler);
+function popupNewPhotoClose() {
+  popupNewPhotoContainer.classList.remove('popup_opened');
+}
+
+function formPhotoSubmit(evt) {
+  evt.preventDefault();
+
+  const cardsElement = cardsTemplate.cloneNode(true);
+
+  const cardTitle = document.querySelector('.popup__input_type_photo-title');
+  const cardHref = document.querySelector('.popup__input_type_photo-href');
+
+
+  cardsElement.querySelector('.gallery__picture').src = cardHref.value;
+  cardsElement.querySelector('.gallery__caption').textContent = cardTitle.value;
+
+  cardsElement.querySelector('.gallery__like-button').addEventListener('click', function (evt) {
+    evt.target.classList.toggle('gallery__like-button_active');
+  });
+
+  cardsElement.querySelector('.gallery__delete-button').addEventListener('click', function (evt) {
+    evt.target.closest('.gallery__card').remove();
+  });
+
+  cardsList.prepend(cardsElement);
+
+  cardTitle.value = '';
+  cardHref.value = '';
+
+  popupNewPhotoClose();
+}
+
+editProfileButton.addEventListener('click', popupProfileOpen);
+closeProfileButton.addEventListener('click', popupProfileClose);
+formProfileElement.addEventListener('submit', formProfileSubmit);
+
+addPhotoButton.addEventListener('click', popupNewPhotoOpen);
+closePhotoButton.addEventListener('click', popupNewPhotoClose);
+formPhotoElement.addEventListener('submit', formPhotoSubmit);
+
+
+
 
 const initialCards = [
   {
@@ -63,6 +114,7 @@ const initialCards = [
 const cardsTemplate = document.querySelector('#card-template').content;
 const cardsList = document.querySelector('.gallery__grid');
 
+
 initialCards.forEach(function (item) {
   const cardsElement = cardsTemplate.cloneNode(true);
 
@@ -76,7 +128,6 @@ initialCards.forEach(function (item) {
   cardsElement.querySelector('.gallery__delete-button').addEventListener('click', function (evt) {
     evt.target.closest('.gallery__card').remove();
   });
-
 
   cardsList.prepend(cardsElement);
 });
