@@ -35,7 +35,7 @@
   <div class="popup popup_type_profile">
     <div class="popup__container">
       <h3 class="popup__header">Редактировать профиль</h3>
-      <form name="popup-form" class="popup__form popup__form_type_profile">
+      <form name="profile-form" class="popup__form">
         <fieldset class="popup__form-container">
           <input type="text" class="popup__input popup__input_type_name" placeholder="Имя" name="name">
           <input type="text" class="popup__input popup__input_type_description" placeholder="О себе" name="about">
@@ -48,7 +48,7 @@
   <div class="popup popup_type_new-photo">
     <div class="popup__container">
       <h3 class="popup__header">Новое место</h3>
-      <form name="popup-form" class="popup__form popup__form_type_new-photo">
+      <form name="card-form" class="popup__form popup__form_type_new-photo">
         <fieldset class="popup__form-container">
           <input type="text" class="popup__input popup__input_type_photo-title" placeholder="Название"
             name="photo-title">
@@ -62,14 +62,14 @@
   </div>
   <div class="popup popup_dark popup_type_fz-photo">
     <div class="popup__photo-container">
-      <img alt="Фото из галлереи" class="popup__image">
+      <img class="popup__image">
       <p class="popup__caption"></p>
       <button type="button" class="popup__close-button" aria-label="Кнопка закрытия попапа"></button>
     </div>
   </div>
   <template id="card-template">
     <li class="gallery__card">
-      <img alt="Фото из галлереи" class="gallery__picture">
+      <img class="gallery__picture">
       <div class="gallery__card-container">
         <h2 class="gallery__caption"></h2>
         <button type="button" class="gallery__like-button" aria-label="Кнопка лайка"></button>
