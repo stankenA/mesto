@@ -102,7 +102,12 @@ function createCard(item) {
 function handlePhotoFormSubmit(evt) {
   evt.preventDefault();
 
-  const cardsElement = createCard();
+  const newObject = {
+    name: cardTitle.value,
+    link: cardHref.value
+  };
+
+  const cardsElement = createCard(newObject);
   cardsList.prepend(cardsElement);
 
   evt.target.reset();
