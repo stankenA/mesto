@@ -18,8 +18,8 @@ const descrInput = formProfileElement.querySelector('.popup__input_type_descript
 const photoNameInput = formPhotoElement.querySelector('.popup__input_type_photo-title');
 const photoHrefInput = formPhotoElement.querySelector('.popup__input_type_photo-href');
 
-const cardTitle = document.querySelector('.popup__input_type_photo-title');
-const cardHref = document.querySelector('.popup__input_type_photo-href');
+let cardTitle = document.querySelector('.popup__input_type_photo-title');
+let cardHref = document.querySelector('.popup__input_type_photo-href');
 
 const cardsTemplate = document.querySelector('#card-template').content;
 const cardsList = document.querySelector('.gallery__grid');
@@ -102,7 +102,12 @@ function createCard(item) {
 function handlePhotoFormSubmit(evt) {
   evt.preventDefault();
 
-  const cardsElement = createCard();
+  const newObject = {
+    name: cardTitle.value,
+    link: cardHref.value
+  };
+
+  const cardsElement = createCard(newObject);
   cardsList.prepend(cardsElement);
 
   evt.target.reset();
