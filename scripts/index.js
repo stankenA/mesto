@@ -83,7 +83,6 @@ function createCard(item) {
     fzPhotoPicture.src = item.link;
     fzPhotoPicture.alt = item.name;
     fzPhotoCaption.textContent = item.name;
-
   });
 
   return cardsElement;
@@ -113,6 +112,7 @@ editProfileButton.addEventListener('click', () => {
   nameInput.value = profName.textContent;
   descrInput.value = profDescr.textContent;
 });
+
 formProfileElement.addEventListener('submit', handleProfileFormSubmit);
 addPhotoButton.addEventListener('click', () => openPopup(popupNewPhotoContainer));
 formPhotoElement.addEventListener('submit', handlePhotoFormSubmit);
