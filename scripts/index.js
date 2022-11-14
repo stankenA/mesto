@@ -32,11 +32,6 @@ const fzPhotoCaption = popupFzPhoto.querySelector('.popup__caption');
 
 function openPopup(popup) {
   popup.classList.add('popup_opened');
-
-  if (popup === popupProfileContainer) {
-    nameInput.value = profName.textContent;
-    descrInput.value = profDescr.textContent;
-  }
 };
 
 function closePopup(popup) {
@@ -69,10 +64,6 @@ function createCard(item) {
   const likeButton = cardsElement.querySelector('.gallery__like-button');
   const deleteButton = cardsElement.querySelector('.gallery__delete-button');
 
-  cardPicture.src = cardHref.value;
-  cardPicture.alt = cardTitle.value;
-  cardCaption.textContent = cardTitle.value;
-
   cardPicture.src = item.link;
   cardPicture.alt = item.name;
   cardCaption.textContent = item.name;
@@ -87,10 +78,11 @@ function createCard(item) {
 
   cardPicture.addEventListener('click', function (evt) {
 
-    popupFzPhoto.classList.add('popup_opened');
+    openPopup(popupFzPhoto);
 
     fzPhotoPicture.src = evt.target.src;
-    fzPhotoCaption.textContent = evt.target.parentNode.querySelector('.gallery__caption').textContent;
+    fzPhotoPicture.alt = evt.target.closest('.gallery__caption').textContent;
+    fzPhotoCaption.textContent = evt.target.closest('.gallery__caption').textContent;
 
   });
 
@@ -116,7 +108,12 @@ function handlePhotoFormSubmit(evt) {
 
 //Слушатели событий
 
-editProfileButton.addEventListener('click', () => openPopup(popupProfileContainer));
+editProfileButton.addEventListener('click', () => {
+  openPopup(popupProfileContainer);
+  nameInput.value = profName.textContent;
+  descrInput.value = profDescr.textContent;
+});
+
 formProfileElement.addEventListener('submit', handleProfileFormSubmit);
 addPhotoButton.addEventListener('click', () => openPopup(popupNewPhotoContainer));
 formPhotoElement.addEventListener('submit', handlePhotoFormSubmit);
