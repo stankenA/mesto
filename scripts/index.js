@@ -28,6 +28,8 @@ const popupFzPhoto = document.querySelector('.popup_type_fz-photo');
 const fzPhotoPicture = popupFzPhoto.querySelector('.popup__image');
 const fzPhotoCaption = popupFzPhoto.querySelector('.popup__caption');
 
+const allPopups = document.querySelectorAll('.popup');
+
 //Функции открытия/закрытия попапов
 
 function openPopup(popup) {
@@ -37,6 +39,24 @@ function openPopup(popup) {
 function closePopup(popup) {
   popup.classList.remove('popup_opened');
 };
+
+//Закрытие попапа при нажатии на оверлей
+
+allPopups.forEach((popup) => {
+  popup.addEventListener('click', (evt) => {
+    evt.target.classList.remove('popup_opened');
+  });
+});
+
+//Закрытие попапа при нажатии на Esc
+
+document.addEventListener('keydown', (evt) => {
+  if (evt.key === 'Escape') {
+    allPopups.forEach((popup) => {
+      closePopup(popup);
+    });
+  }
+});
 
 //Универсальный обработчик крестиков закрытия попапов
 
