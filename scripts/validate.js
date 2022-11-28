@@ -1,34 +1,45 @@
+//Объект с используемыми классами
+
+const selectorList = {
+  formSelector: '.popup__form',
+  inputSelector: '.popup__input',
+  submitButtonSelector: '.popup__submit-button',
+  inactiveButtonClass: 'popup__submit-button_disabled',
+  inputErrorClass: 'popup__input_type_error',
+  errorClass: 'popup__input-error_active'
+}
+
 //Показать элемент ошибки
 
-const showInputError = (formElement, inputElement, errorMessage) => {
+const showInputError = (formElement, inputElement, errorMessage, selectorList) => {
   const errorElement = formElement.querySelector(`.${inputElement.id}-error`);
 
-  inputElement.classList.add('popup__input_type_error');
+  inputElement.classList.add(selectorList.inputErrorClass);
   errorElement.textContent = errorMessage;
-  errorElement.classList.add('popup__input-error_active');
+  errorElement.classList.add(selectorList.errorClass);
 }
 
 //Спрятать элемент ошибки
 
-const hideInputError = (formElement, inputElement) => {
+const hideInputError = (formElement, inputElement, selectorList) => {
   const errorElement = formElement.querySelector(`.${inputElement.id}-error`);
 
-  inputElement.classList.remove('popup__input_type_error');
-  errorElement.classList.remove('popup__input-error_active');
+  inputElement.classList.remove(selectorList.inputErrorClass);
+  errorElement.classList.remove(selectorList.errorClass);
   errorElement.textContent = '';
 }
 
 //Проверить валидность поля
 
-const isValid = (formElement, inputElement) => {
+const isValid = (formElement, inputElement, selectorList) => {
   if (!inputElement.validity.valid) {
-    showInputError(formElement, inputElement, inputElement.validationMessage);
+    showInputError(formElement, inputElement, inputElement.validationMessage, selectorList);
   } else {
-    hideInputError(formElement, inputElement);
+    hideInputError(formElement, inputElement, selectorList);
   }
 };
 
-//
+//Валидность поля для взаимодействия с состоянием кнопки
 
 const hasInvalidInput = (inputList) => {
   return inputList.some((inputElement) => {
@@ -38,41 +49,43 @@ const hasInvalidInput = (inputList) => {
 
 //Включение/отключение кнопки сабмита
 
-const toggleButtonState = (inputList, buttonElement) => {
+const toggleButtonState = (inputList, buttonElement, selectorList) => {
   if (hasInvalidInput(inputList)) {
-    buttonElement.classList.add('popup__submit-button_disabled');
+    buttonElement.classList.add(selectorList.inactiveButtonClass);
   } else {
-    buttonElement.classList.remove('popup__submit-button_disabled');
+    buttonElement.classList.remove(selectorList.inactiveButtonClass);
   }
 };
 
 //Живая проверка инпута на каждый ввод
 
-const setEventListeners = (formElement) => {
-  const inputList = Array.from(formElement.querySelectorAll('.popup__input'));
-  const buttonElement = formElement.querySelector('.popup__submit-button');
+const setEventListeners = (formElement, selectorList) => {
+  const inputList = Array.from(formElement.querySelectorAll(selectorList.inputSelector));
+  const buttonElement = formElement.querySelector(selectorList.submitButtonSelector);
 
-  if (buttonElement.closest('.popup__form').classList.contains('popup__form_type_new-photo')) {
-    toggleButtonState(inputList, buttonElement);
+  if (buttonElement.closest(selectorList.formSelector).classList.contains('popup__form_type_new-photo')) {
+    toggleButtonState(inputList, buttonElement, selectorList);
   }
 
   inputList.forEach((inputElement) => {
     inputElement.addEventListener('input', () => {
-      isValid(formElement, inputElement);
+      isValid(formElement, inputElement, selectorList);
 
-      toggleButtonState(inputList, buttonElement);
+      toggleButtonState(inputList, buttonElement, selectorList);
     });
   });
 };
 
 //Находим все формы и вызываем функцию обработки
 
-const enableValidation = () => {
-  const formList = Array.from(document.querySelectorAll('.popup__form'));
+const enableValidation = (selectorList) => {
+  const formList = Array.from(document.querySelectorAll(selectorList.formSelector));
 
   formList.forEach((formElement) => {
-    setEventListeners(formElement);
+    setEventListeners(formElement, selectorList);
   });
 };
 
-enableValidation();
+enableValidation(selectorList);
+
+
