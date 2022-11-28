@@ -167,19 +167,6 @@ const initialCards = [
 ];
 
 initialCards.forEach(function (item) {
-  const cardsElement = cardsTemplate.cloneNode(true);
-
-  cardsElement.querySelector('.gallery__picture').src = item.link;
-  cardsElement.querySelector('.gallery__caption').textContent = item.name;
-
-  cardsElement.querySelector('.gallery__like-button').addEventListener('click', function (evt) {
-    evt.target.classList.toggle('gallery__like-button_active');
-  });
-
-  cardsElement.querySelector('.gallery__delete-button').addEventListener('click', function (evt) {
-    evt.target.closest('.gallery__card').remove();
-  });
-
-
+  const cardsElement = createCard(item);
   cardsList.prepend(cardsElement);
 });
