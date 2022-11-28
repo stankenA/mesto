@@ -30,14 +30,24 @@ const fzPhotoCaption = popupFzPhoto.querySelector('.popup__caption');
 
 const allPopups = document.querySelectorAll('.popup');
 
+//Закрытие попапа при нажатии на Esc
+
+function closePopupEsc(evt) {
+  if (evt.key === 'Escape') {
+    document.querySelector('.popup_opened').classList.remove('popup_opened');
+  }
+};
+
 //Функции открытия/закрытия попапов
 
 function openPopup(popup) {
   popup.classList.add('popup_opened');
+  document.addEventListener('keydown', closePopupEsc);
 };
 
 function closePopup(popup) {
   popup.classList.remove('popup_opened');
+  document.removeEventListener('keydown', closePopupEsc);
 };
 
 //Закрытие попапа при нажатии на оверлей
@@ -46,16 +56,6 @@ allPopups.forEach((popup) => {
   popup.addEventListener('mousedown', (evt) => {
     evt.target.classList.remove('popup_opened');
   });
-});
-
-//Закрытие попапа при нажатии на Esc
-
-document.addEventListener('keydown', (evt) => {
-  if (evt.key === 'Escape') {
-    allPopups.forEach((popup) => {
-      closePopup(popup);
-    });
-  }
 });
 
 //Универсальный обработчик крестиков закрытия попапов
@@ -113,12 +113,12 @@ function createCard(item) {
 function handlePhotoFormSubmit(evt) {
   evt.preventDefault();
 
-  const newObject = {
+  const cardData = {
     name: cardTitle.value,
     link: cardHref.value
   };
 
-  const cardsElement = createCard(newObject);
+  const cardsElement = createCard(cardData);
   cardsList.prepend(cardsElement);
 
   evt.target.reset();
@@ -138,33 +138,6 @@ addPhotoButton.addEventListener('click', () => openPopup(popupNewPhotoContainer)
 formPhotoElement.addEventListener('submit', handlePhotoFormSubmit);
 
 //Добавление карточек при загрузке страницы
-
-const initialCards = [
-  {
-    name: 'Архыз',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
-  },
-  {
-    name: 'Челябинская область',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg'
-  },
-  {
-    name: 'Иваново',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg'
-  },
-  {
-    name: 'Камчатка',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg'
-  },
-  {
-    name: 'Холмогорский район',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg'
-  },
-  {
-    name: 'Байкал',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
-  }
-];
 
 initialCards.forEach(function (item) {
   const cardsElement = createCard(item);
