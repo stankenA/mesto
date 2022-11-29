@@ -65,10 +65,6 @@ const setEventListeners = (formElement, selectorList) => {
   const inputList = Array.from(formElement.querySelectorAll(selectorList.inputSelector));
   const buttonElement = formElement.querySelector(selectorList.submitButtonSelector);
 
-  if (buttonElement.closest(selectorList.formSelector).classList.contains('popup__form_type_new-photo')) {
-    toggleButtonState(inputList, buttonElement, selectorList);
-  }
-
   inputList.forEach((inputElement) => {
     inputElement.addEventListener('input', () => {
       isValid(formElement, inputElement, selectorList);
