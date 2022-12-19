@@ -1,3 +1,5 @@
+import Card from './Card.js';
+
 const popupProfileContainer = document.querySelector('.popup_type_profile');
 const popupNewPhotoContainer = document.querySelector('.popup_type_new-photo');
 
@@ -15,20 +17,47 @@ const formPhotoElement = document.forms['card-form'];
 const nameInput = formProfileElement.querySelector('.popup__input_type_name');
 const descrInput = formProfileElement.querySelector('.popup__input_type_description');
 
-const photoNameInput = formPhotoElement.querySelector('.popup__input_type_photo-title');
-const photoHrefInput = formPhotoElement.querySelector('.popup__input_type_photo-href');
-
 const cardTitle = document.querySelector('.popup__input_type_photo-title');
 const cardHref = document.querySelector('.popup__input_type_photo-href');
 
-const cardsTemplate = document.querySelector('#card-template').content;
 const cardsList = document.querySelector('.gallery__grid');
 
-const popupFzPhoto = document.querySelector('.popup_type_fz-photo');
-const fzPhotoPicture = popupFzPhoto.querySelector('.popup__image');
-const fzPhotoCaption = popupFzPhoto.querySelector('.popup__caption');
-
 const allPopups = document.querySelectorAll('.popup');
+
+const initialCards = [
+  {
+    name: 'Архыз',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
+  },
+  {
+    name: 'Челябинская область',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg'
+  },
+  {
+    name: 'Иваново',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg'
+  },
+  {
+    name: 'Камчатка',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg'
+  },
+  {
+    name: 'Холмогорский район',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg'
+  },
+  {
+    name: 'Байкал',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
+  }
+];
+
+//Добавление карточек при загрузке страницы
+
+initialCards.forEach((item) => {
+  const cardsElement = new Card(item.name, item.link);
+  const newCard = cardsElement.createCard();
+  cardsList.prepend(newCard);
+});
 
 //Закрытие попапа при нажатии на Esc
 
@@ -50,7 +79,9 @@ function closePopup(popup) {
   document.removeEventListener('keydown', closePopupEsc);
 };
 
-//Закрытие попапа при нажатии на оверлей
+export { openPopup, closePopup };
+
+//Закрытие попапов при нажатии на оверлей
 
 allPopups.forEach((popup) => {
   popup.addEventListener('mousedown', (evt) => {
@@ -75,51 +106,14 @@ function handleProfileFormSubmit(evt) {
   closePopup(popupProfileContainer);
 };
 
-//Функция создания новой карточки
-
-function createCard(item) {
-  const cardsElement = cardsTemplate.cloneNode(true);
-  const cardPicture = cardsElement.querySelector('.gallery__picture');
-  const cardCaption = cardsElement.querySelector('.gallery__caption');
-  const likeButton = cardsElement.querySelector('.gallery__like-button');
-  const deleteButton = cardsElement.querySelector('.gallery__delete-button');
-
-  cardPicture.src = item.link;
-  cardPicture.alt = item.name;
-  cardCaption.textContent = item.name;
-
-  likeButton.addEventListener('click', function (evt) {
-    evt.target.classList.toggle('gallery__like-button_active');
-  });
-
-  deleteButton.addEventListener('click', function (evt) {
-    evt.target.closest('.gallery__card').remove();
-  });
-
-  cardPicture.addEventListener('click', function (evt) {
-
-    openPopup(popupFzPhoto);
-
-    fzPhotoPicture.src = item.link;
-    fzPhotoPicture.alt = item.name;
-    fzPhotoCaption.textContent = item.name;
-  });
-
-  return cardsElement;
-};
-
 //Функция обработки формы в попапе добавления нового фото
 
 function handlePhotoFormSubmit(evt) {
   evt.preventDefault();
 
-  const cardData = {
-    name: cardTitle.value,
-    link: cardHref.value
-  };
-
-  const cardsElement = createCard(cardData);
-  cardsList.prepend(cardsElement);
+  const cardsElement = new Card(cardTitle.value, cardHref.value);
+  const newCard = cardsElement.createCard();
+  cardsList.prepend(newCard);
 
   evt.target.reset();
   closePopup(popupNewPhotoContainer);
@@ -136,10 +130,3 @@ editProfileButton.addEventListener('click', () => {
 formProfileElement.addEventListener('submit', handleProfileFormSubmit);
 addPhotoButton.addEventListener('click', () => openPopup(popupNewPhotoContainer));
 formPhotoElement.addEventListener('submit', handlePhotoFormSubmit);
-
-//Добавление карточек при загрузке страницы
-
-initialCards.forEach(function (item) {
-  const cardsElement = createCard(item);
-  cardsList.prepend(cardsElement);
-});
