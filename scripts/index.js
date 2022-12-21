@@ -1,5 +1,5 @@
 import Card from './Card.js';
-import Validation from './Validate.js';
+import Validation from './FormValidator.js';
 
 const popupProfileContainer = document.querySelector('.popup_type_profile');
 const popupNewPhotoContainer = document.querySelector('.popup_type_new-photo');
