@@ -1,14 +1,16 @@
+import { openPopup, closePopup, closePopupEsc } from './utils.js';
 import Card from './Card.js';
 import Validation from './FormValidator.js';
+import initialCards from './constants.js';
 
 const popupProfileContainer = document.querySelector('.popup_type_profile');
 const popupNewPhotoContainer = document.querySelector('.popup_type_new-photo');
 
-const editProfileButton = document.querySelector('.profile__edit-button');
+const popupProfileOpenBtn = document.querySelector('.profile__edit-button');
 
 const addPhotoButton = document.querySelector('.profile__add-button');
 
-const closeButtons = document.querySelectorAll('.popup__close-button');
+const buttonsPopuClose = document.querySelectorAll('.popup__close-button');
 
 const profName = document.querySelector('.profile__name');
 const profDescr = document.querySelector('.profile__description');
@@ -24,75 +26,33 @@ const cardHref = document.querySelector('.popup__input_type_photo-href');
 const cardsList = document.querySelector('.gallery__grid');
 
 const allPopups = document.querySelectorAll('.popup');
+const cardTemplate = document.querySelector('#card-template').content.querySelector('.gallery__card');
 
-const initialCards = [
-  {
-    name: 'Архыз',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
-  },
-  {
-    name: 'Челябинская область',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg'
-  },
-  {
-    name: 'Иваново',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg'
-  },
-  {
-    name: 'Камчатка',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg'
-  },
-  {
-    name: 'Холмогорский район',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg'
-  },
-  {
-    name: 'Байкал',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
-  }
-];
+//Функция создания новой карточки
+
+function createNewCard(name, link, template, list) {
+  const cardsElement = new Card(name, link, template);
+  const newCard = cardsElement.createCard();
+  list.prepend(newCard);
+}
 
 //Добавление карточек при загрузке страницы
 
 initialCards.forEach((item) => {
-  const cardsElement = new Card(item.name, item.link);
-  const newCard = cardsElement.createCard();
-  cardsList.prepend(newCard);
+  createNewCard(item.name, item.link, cardTemplate, cardsList);
 });
-
-//Закрытие попапа при нажатии на Esc
-
-function closePopupEsc(evt) {
-  if (evt.key === 'Escape') {
-    document.querySelector('.popup_opened').classList.remove('popup_opened');
-  }
-};
-
-//Функции открытия/закрытия попапов
-
-function openPopup(popup) {
-  popup.classList.add('popup_opened');
-  document.addEventListener('keydown', closePopupEsc);
-};
-
-function closePopup(popup) {
-  popup.classList.remove('popup_opened');
-  document.removeEventListener('keydown', closePopupEsc);
-};
-
-export { openPopup, closePopup };
 
 //Закрытие попапов при нажатии на оверлей
 
 allPopups.forEach((popup) => {
   popup.addEventListener('mousedown', (evt) => {
-    evt.target.classList.remove('popup_opened');
+    closePopup(evt.target);
   });
 });
 
 //Универсальный обработчик крестиков закрытия попапов
 
-closeButtons.forEach((button) => {
+buttonsPopuClose.forEach((button) => {
   const popup = button.closest('.popup');
   button.addEventListener('click', () => closePopup(popup));
 });
@@ -112,17 +72,19 @@ function handleProfileFormSubmit(evt) {
 function handlePhotoFormSubmit(evt) {
   evt.preventDefault();
 
-  const cardsElement = new Card(cardTitle.value, cardHref.value);
-  const newCard = cardsElement.createCard();
-  cardsList.prepend(newCard);
+  createNewCard(cardTitle.value, cardHref.value, cardTemplate, cardsList)
 
   evt.target.reset();
+  const btnSubmit = formPhotoElement.querySelector(selectorList.submitButtonSelector);
+  btnSubmit.setAttribute('disabled', '');
+  btnSubmit.classList.add(selectorList.inactiveButtonClass);
+
   closePopup(popupNewPhotoContainer);
 };
 
 //Слушатели событий
 
-editProfileButton.addEventListener('click', () => {
+popupProfileOpenBtn.addEventListener('click', () => {
   openPopup(popupProfileContainer);
   nameInput.value = profName.textContent;
   descrInput.value = profDescr.textContent;

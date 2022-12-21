@@ -1,18 +1,19 @@
-import { openPopup, closePopup } from './index.js'
+import { openPopup, closePopup } from './utils.js'
 
 const popupFzPhoto = document.querySelector('.popup_type_fz-photo');
 const fzPhotoPicture = popupFzPhoto.querySelector('.popup__image');
 const fzPhotoCaption = popupFzPhoto.querySelector('.popup__caption');
 
 class Card {
-  constructor(name, link) {
+  constructor(name, link, cardTemplate) {
     this._name = name;
     this._link = link;
+    this._template = cardTemplate;
   }
 
-  //Находим и клонируем содержимое темплейта с карточкой
+  //Клонируем содержимое темплейта с карточкой
   _getTemplate() {
-    const cardElement = document.querySelector('#card-template').content.querySelector('.gallery__card').cloneNode(true);
+    const cardElement = this._template.cloneNode(true);
     return cardElement;
   }
 
@@ -22,14 +23,6 @@ class Card {
     fzPhotoPicture.alt = this._name;
     fzPhotoCaption.textContent = this._name;
     openPopup(popupFzPhoto);
-  }
-
-  //Функция закрытия попапа
-  _closeFzPopup() {
-    fzPhotoPicture.src = '';
-    fzPhotoPicture.alt = '';
-    fzPhotoCaption.textContent = '';
-    closePopup(popupFzPhoto);
   }
 
   //Функция обработки кнопки лайка
@@ -62,26 +55,18 @@ class Card {
     });
   }
 
-  //Функция обработки закрытия попапа с фото
-  _handleFzPhotoClose() {
-    const fzPopupCloseBtn = popupFzPhoto.querySelector('.popup__close-button');
-    fzPopupCloseBtn.addEventListener('click', () => {
-      this._closeFzPopup();
-    });
-  }
-
   //Функция задания слушателей событий
   _setEventListeners() {
     this._handleLikeBtn();
     this._handleDeleteBtn();
     this._handleFzPhotoOpen();
-    this._handleFzPhotoClose();
   }
 
   //Функция наполнения карточки нужными данными
   _setData() {
-    this._element.querySelector('.gallery__picture').src = this._link;
-    this._element.querySelector('.gallery__picture').alt = this._name;
+    const elementPicture = this._element.querySelector('.gallery__picture');
+    elementPicture.src = this._link;
+    elementPicture.alt = this._name;
     this._element.querySelector('.gallery__caption').textContent = this._name;
   }
 
