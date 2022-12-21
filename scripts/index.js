@@ -1,4 +1,5 @@
 import Card from './Card.js';
+import Validation from './Validate.js';
 
 const popupProfileContainer = document.querySelector('.popup_type_profile');
 const popupNewPhotoContainer = document.querySelector('.popup_type_new-photo');
@@ -130,3 +131,22 @@ editProfileButton.addEventListener('click', () => {
 formProfileElement.addEventListener('submit', handleProfileFormSubmit);
 addPhotoButton.addEventListener('click', () => openPopup(popupNewPhotoContainer));
 formPhotoElement.addEventListener('submit', handlePhotoFormSubmit);
+
+//Валидация форм
+
+const selectorList = {
+  formSelector: '.popup__form',
+  inputSelector: '.popup__input',
+  submitButtonSelector: '.popup__submit-button',
+  inactiveButtonClass: 'popup__submit-button_disabled',
+  inputErrorClass: 'popup__input_type_error',
+  errorClass: 'popup__input-error_active'
+}
+
+const formProfileValidation = new Validation(selectorList, formProfileElement);
+formProfileValidation.enableValidation();
+
+const formPhotoValidation = new Validation(selectorList, formPhotoElement);
+formPhotoValidation.enableValidation();
+
+
